@@ -1,5 +1,7 @@
 /*
 
+選択範囲をgoogleで検索する
+
 メモ
   単語を画像検索する時の基本構文
     https://www.google.co.jp/search?hl=ja&tbm=isch&q=検索ワード
@@ -9,24 +11,35 @@
     encodeUrl = encodeURI(url);
     console.log(url);
     >> https://www.google.co.jp/search?hl=ja&tbm=isch&q=%E8%8A%B1
-
 */
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request == "Action") {
-    gSearch();
+  console.log("メッセージ",request[0]);
+  if (request[0] == "Action") {
+    // 選択範囲の単語を読み込む
+    var selectedText = window.getSelection().toString();
+    gSearch(selectedText,'isch');  // 画像検索
+  }
+  if (request[0] == "Action1") {
+    gSearch(request[1],'isch');  // 画像検索
+  }
+  if (request[0] == "Action2") {
+    gSearch(request[1],'vid');   // 動画検索
   }
 });
 
-// 単語をgoogleで画像検索をする
-function gSearch() {
-  var selectedText = window.getSelection().toString();
-  // console.log('選択範囲',selectedText);
+//
+// 新しいウインドウで、単語をgoogleで画像検索をする
+//
+function gSearch(selectedText,kind) {
+//  console.log('選択範囲',selectedText);
+
   if(selectedText!="")
   {
-    var url= 'https://www.google.co.jp/search?hl=ja&tbm=isch&q='+selectedText;
+    var url= 'https://www.google.co.jp/search?hl=ja&tbm='+kind+'&q='+selectedText;
     var encodeUrl = encodeURI(url);
-    // console.log(url);
-    window.open(url);
+//    console.log(url);
+//    console.log(encodeUrl);
+    window.open(encodeUrl);
   }
 }
