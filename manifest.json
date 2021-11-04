@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "author": "",
+  "homepage_url": "http://example.com",
+  "name": "GSearch",
+  "description": "選択範囲の単語を画像検索する",
+  "version": "0.1",
+  "icons": {
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["script.js"]
+  }],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon_32.png",
+    "default_title": ""
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
