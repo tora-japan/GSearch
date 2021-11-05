@@ -4,7 +4,7 @@
   "homepage_url": "http://example.com",
   "name": "GSearch",
   "description": "選択範囲の単語を画像検索する",
-  "version": "0.2",
+  "version": "0.3",
   "icons": {
     "32": "icon_32.png",
     "48": "icon_48.png",
